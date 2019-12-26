@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import './App.css';
+import QuoteMachine from './QuoteMachine';
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    alignItems: 'center',
+    display: 'flex',
+    height: '100vh',
+  },
+  withBorder: {
+    border: '1px solid green',
+  }
+});
 
 function App() {
+  const classes = useStyles();
+
   const [quotes, setQuotes] = useState([]);
   const [quoteIndex, setQuoteIndex] = useState(0);
 
@@ -37,19 +52,18 @@ function App() {
     return quotes[quoteIndex];
   }
 
-  /**
-   * generate a random integer as Index of quotes
-   */
-  function genRandomQuoteIndex() {
-    return Math.floor(Math.random() * quotes.length);
+  function handleNewRandomQuoteIndex() {
+    setQuoteIndex(Math.floor(Math.random() * quotes.length));
   }
-
-
-
+  //Object.assign(classes.root, classes.withBorder)
   return (
-    <div className="App" id='quote-box'>
-      {getQuote() ? `"${getQuote().quote}" - ${getQuote().author}` : <p>{quoteIndex}</p>}
-    </div>
+    <Grid className={classes.root} id='quote-box' justify='center' container >
+      <Grid xs={11} lg={8} item>
+       { getQuote() ? <QuoteMachine className={classes.withBorder} quoteObj={getQuote()} onClickHandler={handleNewRandomQuoteIndex} />
+        : null 
+       }
+      </Grid>
+    </Grid>
   );
 }
 
