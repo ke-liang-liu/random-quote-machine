@@ -29,7 +29,7 @@ const QuoteMachine = ({ quoteObj, onClickHandler }) => {
         }
       </CardContent>
       <CardActions className={classes.actions}>
-      <Button className={classes.expand} variant="contained" id='new-quote' color='primary' onClick={onClickHandler} size='small'>Next</Button>
+        <Button className={classes.expand} variant="contained" id='new-quote' color='primary' onClick={onClickHandler} size='small'>Next</Button>
         <IconButton
           id='tweet-quote'
           target="_blank"
